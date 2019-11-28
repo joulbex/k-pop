@@ -16,6 +16,7 @@
           :aria-hidden="String(!visible_)"
           :class="bodyClasses"
           :style="bodyStyles_"
+          @mouseleave="onMouseOut"
         >
           <slot v-bind="slotProps" />
           <vp-arrow
@@ -93,6 +94,9 @@ export default {
       type: String,
       validator: value => Popper.placements.indexOf(value) >= 0,
       default: "bottom"
+    },
+    onMouseOut: {
+      type: Function
     }
   },
   data() {

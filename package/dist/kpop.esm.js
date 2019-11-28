@@ -1,7 +1,7 @@
 
 /**
  * k-pop
- * version: 0.6.1,
+ * version: 0.7.0,
  * (c) Christian Kienle, 2019
  * LICENCE: MIT
  * http://github.com/christiankienle/k-pop
@@ -39,20 +39,35 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _objectSpread(target) {
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(source);
 
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    });
   }
 
   return target;
@@ -271,6 +286,9 @@ var script = {
         return Popper.placements.indexOf(value) >= 0;
       },
       default: "bottom"
+    },
+    onMouseOut: {
+      type: Function
     }
   },
   data: function data() {
@@ -318,7 +336,7 @@ var script = {
       return _classes([arrowClass, theme ? "kpop-arrow" : null]);
     },
     bodyStyles_: function bodyStyles_() {
-      var result = _objectSpread({}, this.bodyStyles, {
+      var result = _objectSpread2({}, this.bodyStyles, {
         zIndex: this.defaultBodyZIndex
       });
 
@@ -338,7 +356,7 @@ var script = {
     },
     // We merge the user defined modifiers with the modifiers required by FdPopper
     modifiers_: function modifiers_() {
-      return _objectSpread({
+      return _objectSpread2({
         updateState: {
           enabled: true,
           order: 9999999,
@@ -520,6 +538,9 @@ var __vue_render__ = function __vue_render__() {
     style: _vm.bodyStyles_,
     attrs: {
       "aria-hidden": String(!_vm.visible_)
+    },
+    on: {
+      "mouseleave": _vm.onMouseOut
     }
   }, [_vm._t("default", null, null, _vm.slotProps), _vm._v(" "), _c('vp-arrow', {
     class: _vm.arrowClasses,
@@ -546,17 +567,19 @@ var __vue_is_functional_template__ = false;
 
 /* style inject SSR */
 
-var KPop = __vue_normalize__({
+/* style inject shadow dom */
+
+var __vue_component__ = __vue_normalize__({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, undefined, undefined);
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);
 
-KPop.install = function (_vue) {
-  _vue.component("k-pop", KPop);
+__vue_component__.install = function (_vue) {
+  _vue.component("k-pop", __vue_component__);
 };
 
 if (typeof window !== "undefined" && window.Vue && window.Vue === Vue) {
-  Vue.use(KPop);
+  Vue.use(__vue_component__);
 }
 
-export default KPop;
+export default __vue_component__;
