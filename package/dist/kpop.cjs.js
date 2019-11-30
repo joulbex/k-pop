@@ -293,6 +293,9 @@ var script = {
     },
     onMouseOut: {
       type: Function
+    },
+    onMouseOver: {
+      type: Function
     }
   },
   data: function data() {
@@ -544,6 +547,7 @@ var __vue_render__ = function __vue_render__() {
       "aria-hidden": String(!_vm.visible_)
     },
     on: {
+      "mouseenter": _vm.onMouseOver,
       "mouseleave": _vm.onMouseOut
     }
   }, [_vm._t("default", null, null, _vm.slotProps), _vm._v(" "), _c('vp-arrow', {

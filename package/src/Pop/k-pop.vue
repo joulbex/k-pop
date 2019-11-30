@@ -16,6 +16,7 @@
           :aria-hidden="String(!visible_)"
           :class="bodyClasses"
           :style="bodyStyles_"
+          @mouseenter="onMouseOver"
           @mouseleave="onMouseOut"
         >
           <slot v-bind="slotProps" />
@@ -96,6 +97,9 @@ export default {
       default: "bottom"
     },
     onMouseOut: {
+      type: Function
+    },
+    onMouseOver: {
       type: Function
     }
   },
