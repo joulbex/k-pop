@@ -190,9 +190,8 @@ var KPopTrigger = {
   mounted: function mounted() {
     this.$forceUpdate();
   },
-  updated: function updated() {
-    this.$parent.popperReference = this.$el;
-    this.$parent.updatePopperInstance();
+  updated: function updated() {// this.$parent.popperReference = this.$el
+    // this.$parent.updatePopperInstance()
   },
   render: function render(h) {
     return this.$scopedSlots.default();
@@ -216,6 +215,9 @@ var script = {
     }
   },
   props: {
+    referenceElement: {
+      default: null
+    },
     bodyStyles: {
       type: Object,
       default: function _default() {}
@@ -417,6 +419,10 @@ var script = {
   },
   mounted: function mounted() {
     this.$forceUpdate();
+  },
+  updated: function updated() {
+    this.popperReference = this.referenceElement;
+    this.updatePopperInstance();
   },
   methods: {
     modifier_bodySizeMode: function modifier_bodySizeMode(data) {

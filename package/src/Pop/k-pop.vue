@@ -40,8 +40,8 @@ const KPopTrigger = {
     this.$forceUpdate()
   },
   updated() {
-    this.$parent.popperReference = this.$el
-    this.$parent.updatePopperInstance()
+    // this.$parent.popperReference = this.$el
+    // this.$parent.updatePopperInstance()
   },
   render(h) {
     return this.$scopedSlots.default()
@@ -65,6 +65,7 @@ export default {
     VpArrow: { render: h => h("span") }
   },
   props: {
+    referenceElement: {default: null},
     bodyStyles: {
       type: Object,
       default: () => {}
@@ -220,6 +221,10 @@ export default {
   },
   mounted() {
     this.$forceUpdate()
+  },
+  updated() {
+    this.popperReference = this.referenceElement
+    this.updatePopperInstance()
   },
   methods: {
     modifier_bodySizeMode(data) {
