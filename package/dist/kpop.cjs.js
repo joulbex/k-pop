@@ -361,7 +361,7 @@ var script = {
           bodyClass = this.bodyClass,
           withArrow = this.withArrow;
       var bodyClassAsArray = bodyClass.split(" ");
-      return _classes([].concat(_toConsumableArray(bodyClassAsArray), ["kpop-body", theme ? "kpop-theme-".concat(this.theme) : null, !withArrow ? "kpop-no-arrow" : null]));
+      return _classes([].concat(_toConsumableArray(bodyClassAsArray), ["kpop-body", theme ? "kpop-theme-".concat(this.theme) : null, !withArrow ? "kpop-no-arrow" : null, this.visible_ ? 'kpop-visible' : null]));
     },
     // We merge the user defined modifiers with the modifiers required by FdPopper
     modifiers_: function modifiers_() {
@@ -405,6 +405,10 @@ var script = {
       }
     },
     visible: function visible(_visible) {
+      if (this.visible_ == _visible) {
+        return;
+      }
+
       this.visible_ = _visible;
 
       if (_visible && this.popperInstance == null) {

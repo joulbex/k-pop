@@ -165,7 +165,8 @@ export default {
         ...bodyClassAsArray,
         "kpop-body",
         theme ? `kpop-theme-${this.theme}` : null,
-        !withArrow ? "kpop-no-arrow" : null
+        !withArrow ? "kpop-no-arrow" : null,
+        this.visible_ ? 'kpop-visible' : null
       ])
     },
     // We merge the user defined modifiers with the modifiers required by FdPopper
@@ -209,6 +210,10 @@ export default {
       }
     },
     visible(visible) {
+      if (this.visible_ == visible){
+        return;
+      }
+
       this.visible_ = visible
       if (visible && this.popperInstance == null) {
         this.updatePopperInstance()
